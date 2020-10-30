@@ -13,7 +13,7 @@ export class DashboardComponent implements OnInit {
   constructor(private chapterService: ChapterService) {}
 
   ngOnInit() {
-    this.getChapters(3, 1);
+    //this.getChapters(3, 1);
   }
 
   getChapters(classId: number, subjectId: number): void {
@@ -21,4 +21,8 @@ export class DashboardComponent implements OnInit {
       .getChapters(classId, subjectId)
       .subscribe((chapters) => (this.chapters = chapters));
   }
+
+  public executeSelectedChange = (event) => {
+    console.log(event);
+  };
 }

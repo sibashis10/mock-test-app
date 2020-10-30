@@ -5,9 +5,6 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { FlexLayoutModule } from '@angular/flex-layout';
-
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { MessagesComponent } from './components/messages/messages.component';
@@ -17,7 +14,14 @@ import { ChapterDetailComponent } from './components/chapter/chapter-detail/chap
 
 import { QuestionsComponent } from './components/question/questions/questions.component';
 import { QuestionDetailComponent } from './components/question/question-detail/question-detail.component';
-import { MaterialModule } from './material/material.module';
+import { LayoutComponent } from './components/layout/layout.component';
+import { HeaderComponent } from './components/navigation/header/header.component';
+import { SidenavListComponent } from './components/navigation/sidenav-list/sidenav-list.component';
+import { RoutingModule } from './routing/routing.module';
+import { QuestionModule } from './question/question.module';
+import { NotFoundComponent } from './error-pages/not-found/not-found.component';
+import { ServerErrorComponent } from './error-pages/server-error/server-error.component';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -28,15 +32,19 @@ import { MaterialModule } from './material/material.module';
     ChapterDetailComponent,
     QuestionsComponent,
     QuestionDetailComponent,
+    LayoutComponent,
+    HeaderComponent,
+    SidenavListComponent,
+    NotFoundComponent,
+    ServerErrorComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MaterialModule,
-    FlexLayoutModule,
+    RoutingModule,
+    SharedModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

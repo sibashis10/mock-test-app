@@ -1,0 +1,157 @@
+<section fxLayout="row wrap" fxLayoutAlign="center center">
+  <mat-card fxFlex="700px" fxFlex.xs="100%">
+    <mat-card-title>{{ title }}</mat-card-title>
+    <form
+      [formGroup]="questionForm"
+      autocomplete="off"
+      novalidate
+      (ngSubmit)="createQuestion(questionForm.value)"
+      fxLayout="column wrap"
+      fxLayoutAlign="center center"
+      fxLayoutGap="10px"
+      *ngIf="questionForm"
+    >
+      <mat-card-content>
+        <img
+          [src]="imageSrc"
+          *ngIf="imageSrc"
+          style="height: 300px; width: 500px"
+        />
+        <mat-card-actions *ngIf="!viewOnly">
+          <button mat-button color="warn" (click)="onClick()">
+            <mat-icon>attach_file</mat-icon>
+            Attach Question
+          </button>
+          <input
+            #fileUpload
+            id="fileUpload"
+            name="fileUpload"
+            type="file"
+            (change)="onFileChange($event)"
+            accept="image/*"
+            style="display: none"
+          />
+        </mat-card-actions>
+
+        <mat-form-field>
+          <input
+            matInput
+            type="number"
+            min="1"
+            max="10"
+            [(ngModel)]="question.noOfOption"
+            placeholder="No of option"
+            formControlName="noOfOption"
+            id="noOfOption"
+            [readonly]="viewOnly"
+          />
+          <mat-hint align="end">Between 1 to 10</mat-hint>
+          <mat-error *ngIf="hasError('noOfOption', 'required')"
+            >Number of option is required and should be a number</mat-error
+          >
+          <mat-error *ngIf="hasError('noOfOption', 'max')"
+            >Maximum value should be 10</mat-error
+          >
+          <mat-error *ngIf="hasError('noOfOption', 'min')"
+            >Minimum value should be 1</mat-error
+          >
+        </mat-form-field>
+        <mat-form-field>
+          <input
+            matInput
+            [(ngModel)]="question.rightAnswer"
+            placeholder="Right Answer"
+            formControlName="rightAnswer"
+            id="rightAnswer"
+            [readonly]="viewOnly"
+          />
+          <mat-hint align="end"
+            >Multiple option should be separated by ','</mat-hint
+          >
+          <mat-error *ngIf="hasError('rightAnswer', 'required')"
+            >Right answer is required</mat-error
+          >
+          <mat-error *ngIf="hasError('rightAnswer', 'maxlength')"
+            >You have more than 20 characters</mat-error
+          >
+        </mat-form-field>
+
+        <mat-form-field>
+          <input
+            matInput
+            type="number"
+            min="1"
+            max="10"
+            [(ngModel)]="question.marks"
+            placeholder="No of marks"
+            formControlName="marks"
+            id="marks"
+            [readonly]="viewOnly"
+          />
+          <mat-hint align="end">Between 1 to 10</mat-hint>
+          <mat-error *ngIf="hasError('marks', 'required')"
+            >Marks is required and should be a number</mat-error
+          >
+          <mat-error *ngIf="hasError('marks', 'max')"
+            >Maximum value should be 10</mat-error
+          >
+          <mat-error *ngIf="hasError('marks', 'min')"
+            >Minimum value should be 1</mat-error
+          >
+        </mat-form-field>
+
+        <mat-form-field>
+          <input
+            matInput
+            type="number"
+            min="1"
+            max="10"
+            [(ngModel)]="question.negativeMark"
+            placeholder="Negative marks"
+            formControlName="negativeMark"
+            id="negativeMark"
+            [readonly]="viewOnly"
+          />
+          <mat-hint align="end">Between 0 to 10</mat-hint>
+          <mat-error *ngIf="hasError('negativeMark', 'required')"
+            >Negative Mark is required and should be a number</mat-error
+          >
+          <mat-error *ngIf="hasError('negativeMark', 'max')"
+            >Maximum value should be 10</mat-error
+          >
+          <mat-error *ngIf="hasError('negativeMark', 'min')"
+            >Minimum value should be 0</mat-error
+          >
+        </mat-form-field>
+        <section>
+          <mat-checkbox
+            [(ngModel)]="question.multipleChoice"
+            [checked]="question.multipleChoice"
+            formControlName="multipleChoice"
+            id="multipleChoice"
+            [disabled]="viewOnly"
+            >Multiple Choice</mat-checkbox
+          >
+        </section>
+      </mat-card-content>
+      <mat-card-actions>
+        <button
+          mat-raised-button
+          color="primary"
+          [disabled]="!questionForm.valid"
+          *ngIf="!viewOnly"
+        >
+          {{ btnSubmit }}
+        </button>
+        <button
+          type="button"
+          mat-raised-button
+          color="warn"
+          (click)="onCancel()"
+        >
+          Cancel
+        </button>
+      </mat-card-actions>
+    </form>
+  </mat-card>
+</section>
