@@ -12,9 +12,6 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import { MessageService } from './message.service';
 
-import { Clazz } from '../models/clazz.model';
-import { Subject } from '../models/subject.model';
-
 @Injectable({
   providedIn: 'root',
 })
@@ -31,24 +28,6 @@ export class CommonService {
     private http: HttpClient,
     private messageService: MessageService
   ) {}
-
-  /** GET: classes from the server */
-  getClasses(): Observable<Clazz[]> {
-    let classUrl = environment.appRoot.concat('/classes');
-    return this.http.get<Clazz[]>(classUrl).pipe(
-      tap((_) => this.log('fetched classes')),
-      catchError(this.handleError<Clazz[]>('getClasses', []))
-    );
-  }
-
-  /** GET: subjects from the server */
-  getSubjects(): Observable<Subject[]> {
-    let subjectUrl = environment.appRoot.concat('/subjects');
-    return this.http.get<Subject[]>(subjectUrl).pipe(
-      tap((_) => this.log('fetched subjects')),
-      catchError(this.handleError<Subject[]>('getSubjects', []))
-    );
-  }
 
   public upload(file: any) {
     let uploadUrl = environment.appRoot.concat('/uploadFile');

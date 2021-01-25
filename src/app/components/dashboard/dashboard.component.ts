@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Chapter } from '../../models/chapter.model';
-import { ChapterService } from '../../services/chapter.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,16 +9,9 @@ import { ChapterService } from '../../services/chapter.service';
 export class DashboardComponent implements OnInit {
   chapters: Chapter[];
 
-  constructor(private chapterService: ChapterService) {}
+  constructor() {}
 
   ngOnInit() {
-    //this.getChapters(3, 1);
-  }
-
-  getChapters(classId: number, subjectId: number): void {
-    this.chapterService
-      .getChapters(classId, subjectId)
-      .subscribe((chapters) => (this.chapters = chapters));
   }
 
   public executeSelectedChange = (event) => {
