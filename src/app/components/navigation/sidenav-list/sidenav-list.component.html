@@ -3,12 +3,24 @@
     <mat-icon>home</mat-icon>
     <span class="nav-caption">Dashboard</span>
   </a>
-  <a mat-list-item routerLink="/question/questions" (click)="onSidenavClose()">
+  <a mat-list-item routerLink="/class/classes" (click)="onSidenavClose()">
     <mat-icon>assignment_ind</mat-icon>
-    <span class="nav-caption">Question Setup</span>
+    <span class="nav-caption">Class</span>
   </a>
-  <a mat-list-item routerLink="#" (click)="onSidenavClose()">
+  <a mat-list-item routerLink="/subject/subjects" (click)="onSidenavClose()">
+    <mat-icon>assignment_ind</mat-icon>
+    <span class="nav-caption">Subject</span>
+  </a>
+  <a mat-list-item routerLink="/chapter/chapters" (click)="onSidenavClose()">
+    <mat-icon>assignment_ind</mat-icon>
+    <span class="nav-caption">Chapter</span>
+  </a>
+  <a mat-list-item routerLink="/question/search" (click)="onSidenavClose()">
+    <mat-icon>assignment_ind</mat-icon>
+    <span class="nav-caption">Question</span>
+  </a>
+  <a mat-list-item routerLink="" (click)="onSidenavClose()">
     <mat-icon>account_balance</mat-icon>
-    <span class="nav-caption">Account Actions</span>
+    <span class="nav-caption">Test</span>
   </a>
 </mat-nav-list>

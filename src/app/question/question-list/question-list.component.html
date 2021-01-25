@@ -1,4 +1,4 @@
-<div fxLayout fxLayoutAlign="center center">
+<div *ngIf="dataSource" fxLayout fxLayoutAlign="center center">
   <mat-form-field fxFlex="40%">
     <input
       matInput
@@ -8,12 +8,12 @@
     />
   </mat-form-field>
   <div>
-    <a [routerLink]="['/question/create']" mat-button color="primary"
+    <a [routerLink]="['/question',chapterId,'create']" mat-button color="primary"
       >Create Question</a
     >
   </div>
 </div>
-<table mat-table [dataSource]="dataSource" matSort>
+<table *ngIf="dataSource" mat-table [dataSource]="dataSource" matSort>
   <ng-container matColumnDef="questionImagePath">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>Question</th>
     <td mat-cell *matCellDef="let element">
@@ -91,5 +91,5 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 </table>
-<mat-paginator [pageSize]="2" [pageSizeOptions]="[2, 4, 6, 10, 20]">
+<mat-paginator *ngIf="dataSource" [pageSize]="10" [pageSizeOptions]="[2, 4, 6, 10, 20]">
 </mat-paginator>

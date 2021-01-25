@@ -8,6 +8,21 @@ import { ServerErrorComponent } from '../error-pages/server-error/server-error.c
 const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
   {
+    path: 'class',
+    loadChildren: () =>
+      import('../class/class.module').then((m) => m.ClassModule),
+  },
+  {
+    path: 'subject',
+    loadChildren: () =>
+      import('../subject/subject.module').then((m) => m.SubjectModule),
+  },
+  {
+    path: 'chapter',
+    loadChildren: () =>
+      import('../chapter/chapter.module').then((m) => m.ChapterModule),
+  },
+  {
     path: 'question',
     loadChildren: () =>
       import('../question/question.module').then((m) => m.QuestionModule),

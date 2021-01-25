@@ -1,6 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import {
-  FormBuilder,
   FormControl,
   FormGroup,
   Validators,
@@ -9,7 +8,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
 
-import { Question } from '../../models/question';
+import { Question } from '../../models/question.model';
 import { RepositoryService } from '../../services/repository.service';
 import { CommonService } from '../../services/common.service';
 import { ErrorHandlerService } from '../../services/error-handler.service';
@@ -82,6 +81,7 @@ export class QuestionDetailsComponent implements OnInit {
       this.title = 'Create Question';
       this.btnSubmit = 'Create';
       this.question = new Question();
+      this.question.multipleChoice = false;
       this.setFormField();
     }
   };
@@ -130,6 +130,8 @@ export class QuestionDetailsComponent implements OnInit {
 
   private executeQuestionCreation = (questionFormValue: any) => {
     let apiUrl = 'questions';
+    this.question.chapterId = this.route.snapshot.params['chapterid'];
+    console.log(this.question);
     this.repository.create(apiUrl, this.question).subscribe(
       (res) => {
         let dialogRef = this.dialog.open(
@@ -184,7 +186,7 @@ export class QuestionDetailsComponent implements OnInit {
         const file = fileUpload.files[index];
         this.files.push({ data: file, inProgress: false, progress: 0 });
       }
-      // this.uploadFiles();
+      this.uploadFiles();
     };
     fileUpload.click();
   }

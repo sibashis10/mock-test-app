@@ -1,0 +1,64 @@
+<section fxLayout="row wrap" fxLayoutAlign="center center">
+  <mat-card fxFlex="700px" fxFlex.xs="100%">
+    <mat-card-title>{{ title }}</mat-card-title>
+    <form
+      [formGroup]="classForm"
+      autocomplete="off"
+      novalidate
+      (ngSubmit)="createClass()"
+      fxLayout="column wrap"
+      fxLayoutAlign="center center"
+      fxLayoutGap="10px"
+      *ngIf="classForm"
+    >
+      <mat-card-content>
+        <mat-form-field>
+          <input
+            matInput
+            [(ngModel)]="clazz.classCode"
+            placeholder="Class Code"
+            formControlName="classCode"
+            id="classCode"
+            [readonly]="viewOnly"
+          />
+          <mat-hint align="end">Alphanumeric Code</mat-hint>
+          <mat-error *ngIf="hasError('classCode', 'required')"
+            >Class Code is required</mat-error
+          >
+        </mat-form-field>
+        <mat-form-field>
+          <input
+            matInput
+            [(ngModel)]="clazz.className"
+            placeholder="Class Name"
+            formControlName="className"
+            id="className"
+            [readonly]="viewOnly"
+          />
+          <mat-hint align="end">Class Name</mat-hint>
+          <mat-error *ngIf="hasError('className', 'required')"
+            >Class Name is required</mat-error
+          >
+        </mat-form-field>
+      </mat-card-content>
+      <mat-card-actions>
+        <button
+          mat-raised-button
+          color="primary"
+          [disabled]="!classForm.valid"
+          *ngIf="!viewOnly"
+        >
+          {{ btnSubmit }}
+        </button>
+        <button
+          type="button"
+          mat-raised-button
+          color="warn"
+          (click)="onCancel()"
+        >
+          Cancel
+        </button>
+      </mat-card-actions>
+    </form>
+  </mat-card>
+</section>

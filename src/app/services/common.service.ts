@@ -12,8 +12,8 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import { MessageService } from './message.service';
 
-import { Class } from '../models/class';
-import { Subject } from '../models/subject';
+import { Clazz } from '../models/clazz.model';
+import { Subject } from '../models/subject.model';
 
 @Injectable({
   providedIn: 'root',
@@ -33,11 +33,11 @@ export class CommonService {
   ) {}
 
   /** GET: classes from the server */
-  getClasses(): Observable<Class[]> {
+  getClasses(): Observable<Clazz[]> {
     let classUrl = environment.appRoot.concat('/classes');
-    return this.http.get<Class[]>(classUrl).pipe(
+    return this.http.get<Clazz[]>(classUrl).pipe(
       tap((_) => this.log('fetched classes')),
-      catchError(this.handleError<Class[]>('getClasses', []))
+      catchError(this.handleError<Clazz[]>('getClasses', []))
     );
   }
 

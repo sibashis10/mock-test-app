@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Chapter } from '../../models/chapter';
+import { Chapter } from '../../models/chapter.model';
 import { ChapterService } from '../../services/chapter.service';
 
 @Component({

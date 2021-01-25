@@ -1,32 +1,28 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 
-import { Question } from '../../models/question.model';
+import { Subject } from '../../models/subject.model';
 import { RepositoryService } from '../../services/repository.service';
 import { ErrorHandlerService } from '../../services/error-handler.service';
 
 @Component({
-  selector: 'app-question-list',
-  templateUrl: './question-list.component.html',
-  styleUrls: ['./question-list.component.css'],
+  selector: 'app-subject-list',
+  templateUrl: './subject-list.component.html',
+  styleUrls: ['./subject-list.component.css'],
 })
-export class QuestionListComponent implements OnInit, AfterViewInit {
+export class SubjectListComponent implements OnInit, AfterViewInit {
   public displayedColumns = [
-    'questionImagePath',
-    'rightAnswer',
-    'multipleChoice',
-    'marks',
-    'negativeMark',
-    'noOfOption',
+    'subjectCode',
+    'subjectName',
+    'clazz.classCode',
     'details',
     'update',
     'delete',
   ];
-  public dataSource = new MatTableDataSource<Question>();
-  public chapterId: string;
+  public dataSource = new MatTableDataSource<Subject>();
 
   @ViewChild(MatSort)
   sort: MatSort;
@@ -35,15 +31,13 @@ export class QuestionListComponent implements OnInit, AfterViewInit {
   paginator: MatPaginator;
 
   constructor(
-    private route: ActivatedRoute,
     private repository: RepositoryService,
     private errorHandler: ErrorHandlerService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
-    this.chapterId = this.route.snapshot.paramMap.get("chapterid"); // Snapshot param
-    this.getQuestions();
+    this.getSubjects();
   }
 
   ngAfterViewInit(): void {
@@ -51,14 +45,13 @@ export class QuestionListComponent implements OnInit, AfterViewInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  getQuestions(): void {
-    this.repository.getData('chapters/' + this.chapterId + '/questions').subscribe(
+  getSubjects(): void {
+    this.repository.getData('subjects/').subscribe(
       (res) => {
         console.log(res);
-        this.dataSource.data = res as Question[];
+        this.dataSource.data = res as Subject[];
       },
       (error) => {
-        this.dataSource = null;
         this.errorHandler.handleError(error);
       }
     );
@@ -69,14 +62,12 @@ export class QuestionListComponent implements OnInit, AfterViewInit {
   };
 
   public redirectToDetails = (id: string) => {
-    let url: string = `/question/${this.chapterId}/details/${id}`;
+    let url: string = `/subject/details/${id}`;
     this.router.navigate([url], { queryParams: { state: 'view' } });
   };
-
   public redirectToUpdate = (id: string) => {
-    let url: string = `/question/${this.chapterId}/details/${id}`;
+    let url: string = `/subject/details/${id}`;
     this.router.navigate([url]);
   };
-
   public redirectToDelete = (id: string) => {};
 }
